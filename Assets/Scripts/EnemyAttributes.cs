@@ -5,10 +5,10 @@ using System;
 
 public class EnemyAttributes : MonoBehaviour, Damageable {
 
-    private int _health;
+    [SerializeField]private int _health;
     public int damage;
 
-    int Damageable.health
+    public int health
     {
         get { return _health; }
         set { _health = value; }

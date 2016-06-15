@@ -1,9 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Utilities : MonoBehaviour {
 
-    public static Vector3 CheckDistance(GameObject self, GameObject target)
+    public delegate bool Conditional<T>(T a);
+
+    public static bool InRange(float radi, GameObject self, GameObject target)  //If They are In Range, Return true
+    {
+        if (target.transform.position.x >= self.transform.position.x - radi && target.transform.position.x <= self.transform.position.x + radi)
+            if (target.transform.position.y >= self.transform.position.y - radi && target.transform.position.y <= self.transform.position.y + radi)
+                return true;
+        return false;
+    }
+
+    public static Vector3 GetDistance(GameObject self, GameObject target)
     {
         return target.transform.position - self.transform.position;
     }

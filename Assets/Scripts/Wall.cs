@@ -19,7 +19,7 @@ public class Wall : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            health -= other.gameObject.GetComponent<EnemyAttributes>().health;
+            //health -= other.gameObject.GetComponent<>();
         }
     }
 }

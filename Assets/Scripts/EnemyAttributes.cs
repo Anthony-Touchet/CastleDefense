@@ -1,20 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts;
+using System;
 
-public class EnemyAttributes : MonoBehaviour {
+public class EnemyAttributes : MonoBehaviour, Damageable {
 
-    public int health;
+    private int _health;
     public int damage;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    int Damageable.health
+    {
+        get { return _health; }
+        set { _health = value; }
+    }
 
     void OnCollisionEnter(Collision other)
     {

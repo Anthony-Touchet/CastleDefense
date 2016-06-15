@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 public class TurretControl : MonoBehaviour {
 
-    public float radius;
-    public GameObject target;
-    List<GameObject> possibleTargets;
+    public float radius;                //How Far Can the Unit look for Units
+    public GameObject target;           //The Enemy the Unit will be shooting at
+    List<GameObject> possibleTargets;   //All the Units that can be Targeted. Must Be in Range
 
 	// Use this for initialization
 	void Start () {
@@ -18,8 +18,8 @@ public class TurretControl : MonoBehaviour {
         GameObject[] tempList = GameObject.FindGameObjectsWithTag("Enemy");
         
         foreach(GameObject go in tempList)
-        {
-            if (CheckInRadius(go))
+        {           
+            if (Utilities.InRange(radius, gameObject, go))
             {
                 possibleTargets.Add(go);
             }
@@ -30,9 +30,9 @@ public class TurretControl : MonoBehaviour {
 
         foreach(GameObject go in possibleTargets)
         {
-            if(Utilities.CheckDistance(go, gameObject).magnitude < minDist)
+            if(Utilities.GetDistance(go, gameObject).magnitude < minDist)
             {
-                minDist = Utilities.CheckDistance(go, gameObject).magnitude;
+                minDist = Utilities.GetDistance(go, gameObject).magnitude;
                 tempTarget = go;
             }
         }

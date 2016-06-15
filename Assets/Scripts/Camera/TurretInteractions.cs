@@ -1,29 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class TurretInteractions : MonoBehaviour {
 
-    Ray ray;        //Ray
-    RaycastHit hit; //Raycast hit that stores the Info of what it hit
+    [SerializeField]
+    private RawImage targetSights;  //Targeting Image
 
-    // Use this for initialization
-    void Start () {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        hit = new RaycastHit();
-    }
+    public bool clicked = false;    //Prevents Multiple rays from firing on one click.
 	
 	// Update is called once per frame
 	void Update () {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);    //Ray
-        RaycastHit hit = new RaycastHit();                              //Raycast hit that stores the Info of what it hit
 
-        if (Input.GetAxisRaw("Fire1") != 0)  //Selecting Target.
+        targetSights.transform.position = Input.mousePosition;  //Set the Target's transform
+
+        if (Input.GetAxisRaw("Fire1") == 1 && clicked == false) //If the Button is being held and we can click it
         {
-            Physics.Raycast(ray.origin, ray.direction, out hit);            //Actual Casting of the ray
-
-            Debug.Log(hit.transform.gameObject.name);
+            Debug.Log(Utilities.ShootRay().name);   //Fire Ray and reutrn the GameObject
+            clicked = true;                         //Prevents Multiple RayCasts from one click
         }
-
-        Physics.Raycast(ray.origin, ray.direction, out hit);
+        
+        else if (Input.GetAxisRaw("Fire1") == 0)    //Once we let go of the Mouse
+            clicked = false;                        //Able to click again
     }
 }

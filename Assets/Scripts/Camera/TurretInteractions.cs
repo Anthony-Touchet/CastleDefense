@@ -4,10 +4,18 @@ using UnityEngine.UI;
 
 public class TurretInteractions : MonoBehaviour {
 
+    public RotateAround displayCamera;
+
     [SerializeField]
     private RawImage targetSights;  //Targeting Image
-    public bool clicked = false;    //Prevents Multiple rays from firing on one click.
-    GameObject currentTarget;
+    bool clicked = false;    //Prevents Multiple rays from firing on one click.
+    [HideInInspector]
+    public GameObject currentTarget;
+
+    void Start()
+    {
+        
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -18,6 +26,7 @@ public class TurretInteractions : MonoBehaviour {
         {
             LeaveCurrentUnit();
             currentTarget = Utilities.ShootRay();   //Fire Ray and reutrn the GameObject
+            displayCamera.target = currentTarget;
             LookingAtUnit();
             clicked = true;                         //Prevents Multiple RayCasts from one click
         }
@@ -30,6 +39,7 @@ public class TurretInteractions : MonoBehaviour {
     {
         if (currentTarget.CompareTag("Turret"))
         {
+            
             SetCanvasActive(true);
         }
     }
